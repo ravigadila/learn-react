@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://npmcdn.com/react@15.3.1/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.1/dist/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <meta charset="utf-8">
+    <title>JS Bin</title>
+    <style>
+      .boards { margin: 20px 0; overflow: hidden; }
+      .board { border: 5px solid #ccc; float: left; font: 700 24px HelveticaNeue, Helvetica, Arial; margin-right: 20px; padding: 20px; }
+      .board.selected { border-color: #3BA8AA; }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script type="text/babel">
+      var Board = React.createClass({
+      render: function() {
+      var className = "board";
+      if (this.props.selected) {
+      className += " selected";
+      }
+      return (
+      <div className={className}>
+        {this.props.index + 1}
+      </div>
+      );
+      }
+      });
+
+      var BoardSwitcher = React.createClass({
+      getInitialState: function() {
+      // Start off by selecting the first board
+      return {
+      selectedIndex: 0
+      }
+      },
+
+      onToggleClick: function(evt) {
+      // Here's the meat of the problem. Notice how we can use this.props here (and anywhere else in the component).
+      // When this is called, React updates the state and updates the UI to reflect the new render output.
+      this.setState({
+      selectedIndex: (this.state.selectedIndex + 1) % this.props.numBoards
+      })
+      },
+      
+      render: function() {
+      var boards = [];
+      for (var ii = 0; ii < this.props.numBoards; ii++) {
+      var isSelected = ii === this.state.selectedIndex;
+      boards.push(
+      <Board index={ii} selected={isSelected} key={ii} />
+      );
+      }
+      
+      return (
+      <div>
+        <div className="boards">{boards}</div>
+        <button onClick={this.onToggleClick}>Toggle</button>
+      </div>
+      );
+      }
+      });
+
+      ReactDOM.render(
+      <BoardSwitcher numBoards={3} />,
+      document.getElementById('container')
+      );
+    </script>
+  </body>
+</html>

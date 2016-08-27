@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://npmcdn.com/react@15.3.1/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.1/dist/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <meta charset="utf-8">
+    <title>JS Bin</title>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script type="text/babel">
+      var CowClicker = React.createClass({
+        getInitialState: function() {
+          return {
+            clicks: 0,
+            No_clicks: 5
+          };
+        },
+
+        onCowClick: function(evt) {
+          this.setState({
+            clicks: this.state.clicks + 1,
+            No_clicks: this.state.No_clicks - 1
+          });
+        },
+
+        render: function() {
+          return (
+            <div>
+              <div>Clicks: {this.state.clicks}</div>
+              <div>No Clicks: {this.state.No_clicks}</div>
+              <img
+                  src="http://s3.bypaulshen.com/buildwithreact/cow.png"
+                  onClick={this.onCowClick}
+                  className="cow"
+              />
+              <p>Click the cow</p>
+            </div>
+          );
+        }
+      });
+
+      ReactDOM.render(
+        <CowClicker />,
+        document.getElementById('container')
+      );
+    </script>
+  </body>
+</html>
+
