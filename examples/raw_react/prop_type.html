@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>I'm in a React app!</title>
+  </head>
+  <body>
+    <div id="react-app"></div>
+    <script src="https://npmcdn.com/react@15.3.1/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.1/dist/react-dom.js"></script>
+    <script>
+      var contacts = [
+        {key: 1, name: "James K Nelson", email: "james@jamesknelson.com", description: "Front-end Unicorn"},
+        {key: 2, name: "Jim", email: "jim@example.com"},
+        {key: 3, name: "Joe"},
+      ]
+      var contactItem = React.createClass({
+        propTypes:{
+          name: React.PropTypes.string.isRequired,
+          email: React.PropTypes.string.isRequired,
+          description: React.PropTypes.string
+        },
+        render: function(){
+          return (
+            React.createElement(
+              'li', {},
+              React.createElement('h2', {}, this.props.name),
+              React.createElement('a', {'href': 'mailto:'+this.props.email}, this.props.email),
+              React.createElement('p', {}, this.props.description)
+            )
+          )
+        },
+      })
+      var contactItemElements = contacts.filter(function(c) {return c.email}).map(function(c){return React.createElement(contactItem, c)})
+      var mainElemetn = React.createElement(
+        'div', {},
+        React.createElement('h1', {}, "contacts"),
+        React.createElement('ul', {}, contactItemElements)
+      )
+      ReactDOM.render(mainElemetn, document.getElementById('react-app'))
+    </script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>I'm in a React app!</title>
+  </head>
+  <body>
+    <div id="react-app"></div>
+    <script src="https://npmcdn.com/react@15.3.1/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.1/dist/react-dom.js"></script>
+    <script>
+      var contacts = [
+        {key: 1, name: "James K Nelson", email: "james@jamesknelson.com", description: "Front-end Unicorn"},
+        {key: 2, name: "Jim", email: "jim@example.com"},
+        {key: 3, name: "Joe"},
+      ]
+      var contArr = []
+      for (i=0; i < contacts.length; i++){
+        if (contacts[i]['email']){
+          contArr.push(React.createElement(
+            'li', {},
+            React.createElement('h1', {}, contacts[i]['name']),
+            React.createElement('a', {'href': 'mailto:'+contacts[i]['email']}, contacts[i]['name'])
+          ))
+        }
+      }
+      var ListElements = contArr
+      var mainElement = React.createElement(
+        'div', {},
+        React.createElement('h1', {}, "Conacts"),
+        React.createElement(
+          'ul', {},
+          ListElements
+          
+        )
+      )
+      ReactDOM.render(mainElement, document.getElementById('react-app'))
+    </script>
+  </body>
+</html>
