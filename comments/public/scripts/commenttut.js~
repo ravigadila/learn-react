@@ -1,0 +1,50 @@
+var CommentForm = React.createClass({
+  render: function(){
+    return (
+        <div className="commentForm">
+        hi iam coment form
+      </div>
+    );
+  }
+});
+
+var CommentList = React.createClass({
+  render: function(){
+    return (
+        <div className="coomentList">
+        I am comment list
+      </div>
+    );
+  }
+});
+
+
+var Comment = React.createClass({
+  render: function(){
+    return (
+        <div className="comment">
+        <h2 className="commentAuther">
+        {this.props.auther}
+      </h2>
+        {this.props.children}
+      </div>
+    )
+  }
+});
+
+var CommentBox = React.createClass({
+  render: function(){
+    return (
+        <div className="commentBox">
+        <h1>coments system</h1>
+        <CommentList />
+        <CommentForm />
+        </div>
+    );
+  }
+});
+
+ReactDOM.render(
+    <CommentBox />,
+  document.getElementById('content')
+);
